@@ -1,82 +1,97 @@
-# Lightweight React Template for KAVIA
+# Minimalist Dual-Unit Weather App (weather_dual_unit_frontend)
 
-This project provides a minimal React template with a clean, modern UI and minimal dependencies.
+This project is a minimalist, modern React web app that displays real-time temperature information for global cities and the user's current location, always showing both Celsius and Fahrenheit. It uses OpenWeatherMap as its data source, with a simple, responsive, always-on UI designed for clarity and speed.
 
 ## Features
 
-- **Lightweight**: No heavy UI frameworks - uses only vanilla CSS and React
-- **Modern UI**: Clean, responsive design with KAVIA brand styling
-- **Fast**: Minimal dependencies for quick loading times
-- **Simple**: Easy to understand and modify
+- **Current location weather**: Uses browser geolocation (with permission) to display real-time temperature for the user's local area.
+- **Preset location dropdown**: User can select from a dropdown list of major global cities; app instantly fetches and displays the temperature for the selected city.
+- **Dual-unit display**: Temperatures are always shown in both Celsius and Fahrenheit, side by side.
+- **Minimalist design**: Large, legible numbers; single-screen panel; modern dark/light theme toggle.
+- **Auto theme**: Default is light with optional dark mode toggle.
+- **Fully responsive**: Mobile, tablet, and desktop views are clean and adaptive.
+- **Robust error and loading states**: Graceful handling of API errors, missing geolocation/API key, and no-data cases.
+- **Privacy respect**: User location data is not sent to any backend aside from the direct API call (no server storage or analytics).
 
-## Getting Started
+## Quickstart
 
-In the project directory, you can run:
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+2. **Get an OpenWeatherMap API key:**  
+   Sign up at [openweathermap.org](https://openweathermap.org/api) and obtain a free API key.
 
-### `npm start`
+3. **Environment Variables Setup:**
+   Create a `.env` file at the root of this app with the following content:
+   ```
+   REACT_APP_WEATHER_API_KEY=your_openweather_api_key_here
+   ```
+   _Never commit your real API key to version control!_
 
-Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+4. **Run the app:**
+   ```bash
+   npm start
+   ```
+   Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### `npm test`
+## Project Structure
 
-Launches the test runner in interactive watch mode.
+Major files in `src/`:
+- `App.js` — Main application logic and layout
+- `WeatherDisplay.js` — Dual-unit temperature display and UI
+- `LocationDropdown.js` — Dropdown selector for locations
+- `api.js` — Helper for weather API calls and geolocation
+- `App.css` — Theme variables and layout styles
+- `*.test.js` — Comprehensive test suites (Jest + RTL)
+- `setupTests.js` — Jest DOM setup
 
-### `npm run build`
+## Environment Variables
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **REACT_APP_WEATHER_API_KEY**  
+  _(Required)_  
+  API key for accessing OpenWeatherMap.  
+  Set in your `.env` file:
+  ```
+  REACT_APP_WEATHER_API_KEY=your_real_api_key_here
+  ```
+  If this is missing or incorrect, data fetching will fail and user-facing error will appear.
+
+## Architectural Overview
+
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for visual block diagram and component details.
+
+## Product Requirements
+
+See [docs/PRD.md](docs/PRD.md) for full product requirements and user stories.
 
 ## Customization
 
-### Colors
+- **Location list**: Edit the `PRESET_LOCATIONS` array in `src/api.js` to add or remove default dropdown cities.
+- **Theming/colors**: Update CSS variables in `src/App.css`.
+- **Branding**: Replace or customize the app layout/styles as needed for your organization.
 
-The main brand colors are defined as CSS variables in `src/App.css`:
+## Testing
 
-```css
-:root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
+- All major UI and logic is covered via Jest and React Testing Library.
+- To run all tests:
+  ```
+  npm test
+  ```
+
+## Deployment
+
+To build for production:
+```bash
+npm run build
 ```
+Deploy the contents of the `build` folder with your favorite static hosting (Netlify, Vercel, GitHub Pages, etc).
 
-### Components
+## Troubleshooting
 
-This template uses pure HTML/CSS components instead of a UI framework. You can find component styles in `src/App.css`. 
+- **API key errors**: Make sure `.env` exists and `REACT_APP_WEATHER_API_KEY` is valid (free tier is sufficient).
+- **Geolocation issues**: User must permit geolocation access in their browser; if denied, only preset locations can be fetched.
 
-Common components include:
-- Buttons (`.btn`, `.btn-large`)
-- Container (`.container`)
-- Navigation (`.navbar`)
-- Typography (`.title`, `.subtitle`, `.description`)
+---
 
-## Learn More
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+© Kavia. See LICENSE for terms if included.
