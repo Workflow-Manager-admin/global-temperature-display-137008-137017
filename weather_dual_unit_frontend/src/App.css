@@ -84,21 +84,120 @@
   transform: translateY(0);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* ----------- Weather UI styling ----------- */
+.main-card {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
 }
 
-/* Responsive design for mobile */
+.dropdown-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 18px;
+  gap: 10px;
+}
+.dropdown {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  padding: 6px 18px 6px 9px;
+  outline: none;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-weight: 500;
+  box-shadow: none;
+}
+.dropdown:focus {
+  border-color: var(--text-secondary);
+}
+.dropdown-label {
+  font-size: 1rem;
+}
+
+.weather-panel {
+  padding: 20px 0 0 0;
+}
+
+.city-name {
+  font-size: 24px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.temp-row {
+  display: flex;
+  gap: 36px;
+  justify-content: center;
+  align-items: flex-end;
+}
+.temp-box {
+  display: flex;
+  align-items: baseline;
+}
+
+/* Loader animation for loading state */
+.loader {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  vertical-align: middle;
+  border: 3px solid var(--text-secondary);
+  border-top: 3px solid var(--button-bg);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  margin-bottom: -3px;
+  margin-right: 8px;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.weather-panel.error {
+  color: #c62828 !important;
+  font-size: 1.1rem;
+  margin-top: 16px;
+}
+.weather-panel.no-data {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-top: 14px;
+}
+.weather-panel.loading {
+  font-size: 1.16rem;
+  margin-top: 16px;
+  color: var(--text-secondary);
+}
+
+/* Responsive styles */
 @media (max-width: 768px) {
+  .main-card {
+    width: 98vw;
+    min-width: 0;
+    padding: 16px 3vw !important;
+    max-width: 98vw;
+  }
   .theme-toggle {
     top: 10px;
     right: 10px;
     padding: 8px 16px;
     font-size: 12px;
+  }
+  .city-name {
+    font-size: 18px;
+  }
+  .temp-box {
+    font-size: 32px !important;
+  }
+  .dropdown {
+    font-size: 0.99rem !important;
+    padding: 4px 12px 4px 6px !important;
+  }
+  .dropdown-label {
+    font-size: 0.99rem !important;
   }
 }
